@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import useRootScope from './hooks/useRootScope';
 
-function App() {
+// Import all the route components
+import Home from './components/Home';
+import AllCountries from './components/AllCountries';
+import CountryDetail from './components/CountryDetail';
+
+const App: React.FC = () => {
+  const { state, updateState } = useRootScope();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/all-countries" component={AllCountries} />
+        <Route path="/country-detail" component={CountryDetail} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
